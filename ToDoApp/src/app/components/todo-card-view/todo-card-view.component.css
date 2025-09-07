@@ -1,0 +1,11 @@
+.todo-actions {
+    img {
+        height: 1.5rem;
+        cursor: pointer;
+    }
+}
+
+.card-container {
+    background-color: rgb(170, 170, 249);
+    overflow: hidden;
+}

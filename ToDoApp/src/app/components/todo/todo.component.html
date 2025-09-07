@@ -1,0 +1,36 @@
+<div class="container-fluid pt-4">
+  <div class="todo-body-container px-3 py-4 m-auto rounded-5">
+    <div class="todo-header d-flex justify-content-between">
+      <span class="ps-2">Todo {{filteredTodos.length}}</span>
+      <button class="btn" (click)="deleteAllTodos()">Delete All</button>
+    </div>
+
+    <app-todo-filter (filterChanged)="applyFilter($event)"></app-todo-filter>
+
+    <div class="row todo-items px-1">
+      @for (todo of filteredTodos; track todo.id) {
+        <div class="col-6 mb-3">
+          <app-todo-card-view
+            [todo]="todo"
+            (markAsCompleted)="onMarkAsCompleted($event)"
+            (delete)="onDelete($event)"
+            (edit)="onEdit($event)">
+          </app-todo-card-view>
+        </div>
+      }
+    </div>
+
+    <div class="d-flex justify-content-end align-bottom mt-2">
+      <button class="btn text-white bg-dark p-3 rounded-5" (click)="openAddDialog()">Add</button>
+    </div>
+
+    <app-todo-input-dialog
+      *ngIf="showInputDialog"
+      [mode]="dialogMode"
+      [todo]="selectedTodo"
+      (save)="onSave($event)"
+      (update)="onUpdate($event)"
+      (cancel)="onCancel()">
+    </app-todo-input-dialog>
+  </div>
+</div>

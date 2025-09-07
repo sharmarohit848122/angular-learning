@@ -1,0 +1,15 @@
+<div class="d-flex gap-3 align-items-center mb-3">
+  <label>Filter by:</label>
+  <select [(ngModel)]="selectedField" (change)="onFieldChange()" class="form-select w-auto">
+    <option value="dueDate">Due Date</option>
+    <option value="priority">Priority</option>
+    <option value="title">Title</option>
+    <option value="completed">Completion Status</option>
+  </select>
+
+  <label>Order:</label>
+  <select [(ngModel)]="selectedOrder" (change)="onOrderChange()" class="form-select w-auto">
+    <option value="asc">Ascending</option>
+    <option value="desc">Descending</option>
+  </select>
+</div>

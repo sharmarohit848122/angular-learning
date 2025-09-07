@@ -1,0 +1,87 @@
+<h1>Forms Tutorial</h1>
+
+
+<!-- Template Driven From -->
+
+
+<!-- <form #formData="ngForm">
+
+  <label for="name">Name:</label>
+  <input
+    type="text"
+    placeholder="Your Name"
+    name="name"
+    #name="ngModel"
+    ngModel
+    required
+    minlength="3"
+    pattern="[A-Za-z]+(?:\s[A-Za-z]+)*\s?"
+    oninput="this.value = this.value.replace(/[^A-Za-z\s]|^\s+|\s(?=\s)/g, '')"
+  />
+  <div *ngIf="name.invalid && (name.dirty || name.touched)">
+    <small *ngIf="name.hasError('required')">Name is required.</small>
+    <small *ngIf="name.hasError('minlength')">Name should be at least 3 characters.</small>
+    <small *ngIf="name.hasError('pattern')">Only letters and a single space between words are allowed.</small>
+  </div>
+  <br /><br />
+
+  <label for="role">Role:</label>
+  <input
+    type="text"
+    placeholder="Your Role"
+    name="role"
+    #role="ngModel"
+    ngModel
+    required
+    minlength="3"
+  />
+  <div *ngIf="role.invalid && (role.dirty || role.touched)">
+    <small *ngIf="role.hasError('required')">Role is required.</small>
+    <small *ngIf="role.hasError('minlength')">Role should be at least 3 characters.</small>
+  </div>
+  <br /><br />
+
+
+  <label for="gender">Gender:</label>
+  <select name="gender" #gender="ngModel" ngModel required>
+    <option value="" disabled selected>-- Select Gender --</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+    <option value="others">Others</option>
+  </select>
+  <div *ngIf="gender.invalid && (gender.dirty || gender.touched)">
+    <small *ngIf="gender.hasError('required')">Gender is required.</small>
+  </div>
+  <br /><br />
+
+  <button type="submit" [disabled]="formData.invalid" (click)="onSubmit(formData)">Submit</button>
+</form>  -->
+
+
+
+
+
+
+
+<!-- Reactive Forms -->
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <!-- Name Field -->
+  <input type="text" formControlName="name" placeholder="Enter Your Name" />
+
+  <div *ngIf="checkFieldState(FieldNames.Name, FieldState.Touched, FieldState.Invalid)">
+    <small *ngIf="checkFieldError(FieldNames.Name, ValidationErrors.Required)">Name is required</small>
+    <small *ngIf="checkFieldError(FieldNames.Name, ValidationErrors.MinLength)">At least 3 chars required</small>
+  </div>
+
+  <!-- Role Field -->
+  <input type="text" formControlName="role" placeholder="Enter Your Role" />
+
+  <div *ngIf="checkFieldState(FieldNames.Role, FieldState.Touched, FieldState.Invalid)">
+    <small *ngIf="checkFieldError(FieldNames.Role, ValidationErrors.Required)">Role is required</small>
+    <small *ngIf="checkFieldError(FieldNames.Role, ValidationErrors.MinLength)">At least 2 chars required</small>
+  </div>
+
+  <!-- Submit Button -->
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>

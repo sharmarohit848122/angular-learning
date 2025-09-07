@@ -1,0 +1,32 @@
+<!-- Todo Card -->
+
+<div class="card-container rounded-2">
+  <div class="p-2 d-flex" (click)="onCardClick($event)">
+    <div class="flex-grow-1 d-flex flex-column">
+      <span class="fs-5 fw-bold">{{todo.title}}</span>
+      <span>{{todo.description}}</span>
+      <span>
+        <pre>Due: {{todo.dueDate | date: 'short'}}  Edited: {{todo.updatedAt | date: 'short'}}</pre>
+      </span>
+    </div>
+    <div class="todo-actions d-flex flex-column mx-2 my-1 justify-content-between">
+      <img (click)="onMarkAsCompleted()" src="check_circle.svg" alt="check mark">
+      <img (click)="onDelte()" src="delete_icon.svg" alt="delete_icon">
+      <img (click)="onEdit()" src="edit_icon.svg" alt="edit_icon">
+    </div>
+
+    <div *ngIf="showDetails"
+      class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex justify-content-center align-items-center"
+      (click)="closeDetails()">
+      <div class="bg-white p-4 rounded shadow w-50" (click)="$event.stopPropagation()">
+        <h4 class="fw-bold">{{todo.title}}</h4>
+        <p><strong>Description:</strong> {{todo.description}}</p>
+        <p><strong>Due Date:</strong> {{todo.dueDate | date:'fullDate'}}</p>
+        <p><strong>Created At:</strong> {{todo.createdAt | date:'fullDate'}}</p>
+        <p><strong>Last Edited:</strong> {{todo.updatedAt | date:'short'}}</p>
+        <p><strong>Status:</strong> {{todo.completed ? 'Completed' : 'Pending'}}</p>
+        <p><strong>Priority:</strong> {{todo.priority}}</p>
+        <button class="btn btn-secondary mt-3" (click)="closeDetails()">Close</button>
+      </div>
+    </div>
+  </div>
